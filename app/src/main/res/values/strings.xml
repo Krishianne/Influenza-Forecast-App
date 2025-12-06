@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">FluAlert</string>
+    <string name="peak_title">Peak Outbreak Per Subtype (2026)</string>
+</resources>
