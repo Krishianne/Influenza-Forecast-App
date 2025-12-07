@@ -210,8 +210,8 @@
                     android:layout_margin="16dp"
                     android:background="@drawable/panel_square"
                     android:elevation="4dp"
-                    android:orientation="vertical"
                     android:padding="16dp">
+
                     <TextView
                         android:id="@+id/panelTitle"
                         android:layout_width="wrap_content"
@@ -228,69 +228,363 @@
                         android:layout_below="@id/panelTitle"
                         android:background="#ffffff" />
 
-                    <TableLayout
-                        android:id="@+id/infoTable"
+                    <LinearLayout
+                        android:id="@+id/infoList"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/dividerLine"
                         android:layout_marginTop="12dp"
-                        android:stretchColumns="3">
-                        <TableRow android:gravity="center_vertical" android:paddingBottom="8dp">
-                            <TextView android:paddingEnd="8dp" android:text="A" android:textColor="#FFFFFF" />
-                            <TextView android:paddingEnd="8dp" android:text="Dec" android:textColor="#FFFFFF" />
-                            <TextView android:paddingEnd="8dp" android:text="Week 1" android:textColor="#FFFFFF" />
-                            <SeekBar android:id="@+id/SeekBar_A" android:layout_width="0dp" android:layout_height="wrap_content" android:clickable="false" android:contextClickable="false" android:focusable="false" android:max="100" android:progress="31" android:progressDrawable="@drawable/gradient_seekbar_style" android:splitTrack="false" android:thumb="@drawable/seekbar_button" />
-                            <TextView android:id="@+id/PeakPercent_A" android:paddingStart="8dp" android:text="31%" android:textColor="#FFFFFF" />
-                        </TableRow>
-                        <TableRow android:gravity="center_vertical" android:paddingBottom="8dp">
-                            <TextView android:paddingEnd="8dp" android:text="A(H1)" android:textColor="#FFFFFF" />
-                            <TextView android:paddingEnd="8dp" android:text="Nov" android:textColor="#FFFFFF" />
-                            <TextView android:paddingEnd="8dp" android:text="Week 3" android:textColor="#FFFFFF" />
-                            <SeekBar android:id="@+id/SeekBar_A_H1" android:layout_width="0dp" android:layout_height="wrap_content" android:max="100" android:progress="31" android:progressDrawable="@drawable/gradient_seekbar_style" android:splitTrack="false" android:thumb="@drawable/seekbar_button" />
-                            <TextView android:id="@+id/PeakPercent_A_H1" android:paddingStart="8dp" android:text="31%" android:textColor="#FFFFFF" />
-                        </TableRow>
-                        <TableRow android:gravity="center_vertical" android:paddingBottom="8dp">
-                            <TextView android:paddingEnd="8dp" android:text="A(H1N1)pdm09" android:textColor="#FFFFFF" />
-                            <TextView android:paddingEnd="8dp" android:text="Dec" android:textColor="#FFFFFF" />
-                            <TextView android:paddingEnd="8dp" android:text="Week 1" android:textColor="#FFFFFF" />
-                            <SeekBar android:id="@+id/SeekBar_A_H1N1" android:layout_width="0dp" android:layout_height="wrap_content" android:max="100" android:progress="31" android:progressDrawable="@drawable/gradient_seekbar_style" android:splitTrack="false" android:thumb="@drawable/seekbar_button" />
-                            <TextView android:id="@+id/PeakPercent_A_H1N1" android:paddingStart="8dp" android:text="31%" android:textColor="#FFFFFF" />
-                        </TableRow>
-                        <TableRow android:gravity="center_vertical" android:paddingBottom="8dp">
-                            <TextView android:paddingEnd="8dp" android:text="A(H3)" android:textColor="#FFFFFF" />
-                            <TextView android:paddingEnd="8dp" android:text="Dec" android:textColor="#FFFFFF" />
-                            <TextView android:paddingEnd="8dp" android:text="Week 1" android:textColor="#FFFFFF" />
-                            <SeekBar android:id="@+id/SeekBar_A_H3" android:layout_width="0dp" android:layout_height="wrap_content" android:max="100" android:progress="31" android:progressDrawable="@drawable/gradient_seekbar_style" android:splitTrack="false" android:thumb="@drawable/seekbar_button" />
-                            <TextView android:id="@+id/PeakPercent_A_H3" android:paddingStart="8dp" android:text="31%" android:textColor="#FFFFFF" />
-                        </TableRow>
-                        <TableRow android:gravity="center_vertical" android:paddingBottom="8dp">
-                            <TextView android:paddingEnd="8dp" android:text="B" android:textColor="#FFFFFF" />
-                            <TextView android:paddingEnd="8dp" android:text="Dec" android:textColor="#FFFFFF" />
-                            <TextView android:paddingEnd="8dp" android:text="Week 1" android:textColor="#FFFFFF" />
-                            <SeekBar android:id="@+id/SeekBar_B" android:layout_width="0dp" android:layout_height="wrap_content" android:max="100" android:progress="31" android:progressDrawable="@drawable/gradient_seekbar_style" android:splitTrack="false" android:thumb="@drawable/seekbar_button" />
-                            <TextView android:id="@+id/PeakPercent_B" android:paddingStart="8dp" android:text="31%" android:textColor="#FFFFFF" />
-                        </TableRow>
-                        <TableRow android:gravity="center_vertical" android:paddingBottom="8dp">
-                            <TextView android:paddingEnd="8dp" android:text="B(Victoria)" android:textColor="#FFFFFF" />
-                            <TextView android:paddingEnd="8dp" android:text="Dec" android:textColor="#FFFFFF" />
-                            <TextView android:paddingEnd="8dp" android:text="Week 1" android:textColor="#FFFFFF" />
-                            <SeekBar android:id="@+id/SeekBar_B_Vic" android:layout_width="0dp" android:layout_height="wrap_content" android:max="100" android:progress="31" android:progressDrawable="@drawable/gradient_seekbar_style" android:splitTrack="false" android:thumb="@drawable/seekbar_button" />
-                            <TextView android:id="@+id/PeakPercent_B_Vic" android:paddingStart="8dp" android:text="31%" android:textColor="#FFFFFF" />
-                        </TableRow>
-                        <TableRow android:gravity="center_vertical" android:paddingBottom="8dp">
-                            <TextView android:paddingEnd="8dp" android:text="B(Yamagata)" android:textColor="#FFFFFF" />
-                            <TextView android:paddingEnd="8dp" android:text="Dec" android:textColor="#FFFFFF" />
-                            <TextView android:paddingEnd="8dp" android:text="Week 1" android:textColor="#FFFFFF" />
-                            <SeekBar android:id="@+id/SeekBar_B_Yam" android:layout_width="0dp" android:layout_height="wrap_content" android:max="100" android:progress="31" android:progressDrawable="@drawable/gradient_seekbar_style" android:splitTrack="false" android:thumb="@drawable/seekbar_button" />
-                            <TextView android:id="@+id/PeakPercent_B_Yam" android:paddingStart="8dp" android:text="31%" android:textColor="#FFFFFF" />
-                        </TableRow>
-                    </TableLayout>
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingBottom="12dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3.5"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:text="A"
+                                    android:textStyle="bold"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+                                <TextView
+                                    android:text="Dec Week 1"
+                                    android:textColor="#CCCCCC"
+                                    android:textSize="11sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                            </LinearLayout>
+
+                            <SeekBar
+                                android:id="@+id/SeekBar_A"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="5"
+                                android:clickable="false"
+                                android:contextClickable="false"
+                                android:focusable="false"
+                                android:max="100"
+                                android:progress="10"
+                                android:progressDrawable="@drawable/gradient_seekbar_style"
+                                android:splitTrack="false"
+                                android:thumb="@drawable/seekbar_button" />
+
+                            <TextView
+                                android:id="@+id/PeakPercent_A"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:gravity="end"
+                                android:text="10%"
+                                android:textColor="#FFFFFF" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingBottom="12dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3.5"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:text="A(H1)"
+                                    android:textStyle="bold"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                                <TextView
+                                    android:text="Nov Week 3"
+                                    android:textColor="#CCCCCC"
+                                    android:textSize="11sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                            </LinearLayout>
+
+                            <SeekBar
+                                android:id="@+id/SeekBar_A_H1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="5"
+                                android:max="100"
+                                android:progress="80"
+                                android:progressDrawable="@drawable/gradient_seekbar_style"
+                                android:splitTrack="false"
+                                android:thumb="@drawable/seekbar_button" />
+
+                            <TextView
+                                android:id="@+id/PeakPercent_A_H1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:gravity="end"
+                                android:text="80%"
+                                android:textColor="#FFFFFF" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingBottom="12dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3.5"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:text="A(H1N1)pdm09"
+                                    android:textStyle="bold"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    android:maxLines="1"
+                                    android:ellipsize="end"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+                                <TextView
+                                    android:text="Dec Week 1"
+                                    android:textColor="#CCCCCC"
+                                    android:textSize="11sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                            </LinearLayout>
+
+                            <SeekBar
+                                android:id="@+id/SeekBar_A_H1N1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="5"
+                                android:max="100"
+                                android:progress="25"
+                                android:progressDrawable="@drawable/gradient_seekbar_style"
+                                android:splitTrack="false"
+                                android:thumb="@drawable/seekbar_button" />
+
+                            <TextView
+                                android:id="@+id/PeakPercent_A_H1N1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:gravity="end"
+                                android:text="25%"
+                                android:textColor="#FFFFFF" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingBottom="12dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3.5"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:text="A(H3)"
+                                    android:textStyle="bold"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                                <TextView
+                                    android:text="Dec Week 1"
+                                    android:textColor="#CCCCCC"
+                                    android:textSize="11sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                            </LinearLayout>
+
+                            <SeekBar
+                                android:id="@+id/SeekBar_A_H3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="5"
+                                android:max="100"
+                                android:progress="70"
+                                android:progressDrawable="@drawable/gradient_seekbar_style"
+                                android:splitTrack="false"
+                                android:thumb="@drawable/seekbar_button" />
+
+                            <TextView
+                                android:id="@+id/PeakPercent_A_H3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:gravity="end"
+                                android:text="70%"
+                                android:textColor="#FFFFFF" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingBottom="12dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3.5"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:text="B"
+                                    android:textStyle="bold"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                                <TextView
+                                    android:text="Dec Week 1"
+                                    android:textColor="#CCCCCC"
+                                    android:textSize="11sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                            </LinearLayout>
+
+                            <SeekBar
+                                android:id="@+id/SeekBar_B"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="5"
+                                android:max="100"
+                                android:progress="40"
+                                android:progressDrawable="@drawable/gradient_seekbar_style"
+                                android:splitTrack="false"
+                                android:thumb="@drawable/seekbar_button" />
+
+                            <TextView
+                                android:id="@+id/PeakPercent_B"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:gravity="end"
+                                android:text="40%"
+                                android:textColor="#FFFFFF" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingBottom="12dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3.5"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:text="B(Victoria)"
+                                    android:textStyle="bold"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                                <TextView
+                                    android:text="Dec Week 1"
+                                    android:textColor="#CCCCCC"
+                                    android:textSize="11sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                            </LinearLayout>
+
+                            <SeekBar
+                                android:id="@+id/SeekBar_B_Vic"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="5"
+                                android:max="100"
+                                android:progress="100"
+                                android:progressDrawable="@drawable/gradient_seekbar_style"
+                                android:splitTrack="false"
+                                android:thumb="@drawable/seekbar_button" />
+
+                            <TextView
+                                android:id="@+id/PeakPercent_B_Vic"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:gravity="end"
+                                android:text="100%"
+                                android:textColor="#FFFFFF" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingBottom="12dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3.5"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:text="B(Yamagata)"
+                                    android:textStyle="bold"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                                <TextView
+                                    android:text="Dec Week 1"
+                                    android:textColor="#CCCCCC"
+                                    android:textSize="11sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                            </LinearLayout>
+
+                            <SeekBar
+                                android:id="@+id/SeekBar_B_Yam"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="5"
+                                android:max="100"
+                                android:progress="30"
+                                android:progressDrawable="@drawable/gradient_seekbar_style"
+                                android:splitTrack="false"
+                                android:thumb="@drawable/seekbar_button" />
+
+                            <TextView
+                                android:id="@+id/PeakPercent_B_Yam"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:gravity="end"
+                                android:text="30%"
+                                android:textColor="#FFFFFF" />
+                        </LinearLayout>
+                    </LinearLayout>
                 </RelativeLayout>
                 <TextView
                     android:id="@+id/credits"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="© Team Mac-e"
+                    android:text="©Team Mac-E"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
                     android:layout_gravity="center"
