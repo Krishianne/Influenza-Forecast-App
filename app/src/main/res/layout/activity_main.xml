@@ -8,7 +8,7 @@
     android:background="@drawable/gradient_bg"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -24,18 +24,277 @@
             android:id="@+id/panelTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/peak_title"
+            android:text="Peak Outbreak Per Subtype (2026)"
             android:textSize="18sp"
             android:textColor="#ffffff"
             android:layout_marginBottom="8dp"/>
 
-        <TextView
-            android:id="@+id/panelContent"
-            android:layout_width="wrap_content"
+        <View
+            android:id="@+id/dividerLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/panelTitle"
+            android:background="#ffffff"
+            />
+
+        <TableLayout
+            android:id="@+id/infoTable"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="This is the content inside the card."
-            android:textColor="#333333"/>
+            android:layout_below="@id/dividerLine"
+            android:layout_marginTop="12dp"
+            android:stretchColumns="3">
 
-    </LinearLayout>
+            <TableRow
+                android:gravity="center_vertical"
+                android:paddingBottom="8dp">
 
+                <TextView
+                    android:text="A"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <TextView
+                    android:text="Dec"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <TextView
+                    android:text="Week 1"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <SeekBar
+                    android:id="@+id/SeekBar_A"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:contextClickable="false"
+                    android:focusable="false"
+                    android:max="100"
+                    android:progress="31"
+                    android:progressDrawable="@drawable/gradient_seekbar_style"
+                    android:splitTrack="false"
+                    android:thumbTint="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/PeakPercent_A"
+                    android:text="31%"
+                    android:textColor="#FFFFFF"
+                    android:paddingStart="8dp" />
+            </TableRow>
+
+            <TableRow
+                android:gravity="center_vertical"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:text="A(H1)"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <TextView
+                    android:text="Nov"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <TextView
+                    android:text="Week 3"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <SeekBar
+                    android:id="@+id/SeekBar_A_H1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progress="31"
+                    android:progressDrawable="@drawable/gradient_seekbar_style"
+                    android:splitTrack="false"
+                    android:thumbTint="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/PeakPercent_A_H1"
+                    android:text="31%"
+                    android:textColor="#FFFFFF"
+                    android:paddingStart="8dp" />
+            </TableRow>
+
+            <TableRow
+                android:gravity="center_vertical"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:text="A(H1N1)pdm09"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <TextView
+                    android:text="Dec"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <TextView
+                    android:text="Week 1"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <SeekBar
+                    android:id="@+id/SeekBar_A_H1N1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progress="31"
+                    android:progressDrawable="@drawable/gradient_seekbar_style"
+                    android:splitTrack="false"
+                    android:thumbTint="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/PeakPercent_A_H1N1"
+                    android:text="31%"
+                    android:textColor="#FFFFFF"
+                    android:paddingStart="8dp" />
+            </TableRow>
+            <TableRow
+                android:gravity="center_vertical"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:text="A(H3)"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <TextView
+                    android:text="Dec"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <TextView
+                    android:text="Week 1"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <SeekBar
+                    android:id="@+id/SeekBar_A_H3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progress="31"
+                    android:progressDrawable="@drawable/gradient_seekbar_style"
+                    android:splitTrack="false"
+                    android:thumbTint="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/PeakPercent_A_H3"
+                    android:text="31%"
+                    android:textColor="#FFFFFF"
+                    android:paddingStart="8dp" />
+            </TableRow>
+            <TableRow
+                android:gravity="center_vertical"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:text="B"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <TextView
+                    android:text="Dec"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <TextView
+                    android:text="Week 1"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <SeekBar
+                    android:id="@+id/SeekBar_B"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progress="31"
+                    android:progressDrawable="@drawable/gradient_seekbar_style"
+                    android:splitTrack="false"
+                    android:thumbTint="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/PeakPercent_B"
+                    android:text="31%"
+                    android:textColor="#FFFFFF"
+                    android:paddingStart="8dp" />
+            </TableRow>
+            <TableRow
+                android:gravity="center_vertical"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:text="B(Victoria)"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <TextView
+                    android:text="Dec"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <TextView
+                    android:text="Week 1"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <SeekBar
+                    android:id="@+id/SeekBar_B_Vic"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progress="31"
+                    android:progressDrawable="@drawable/gradient_seekbar_style"
+                    android:splitTrack="false"
+                    android:thumbTint="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/PeakPercent_B_Vic"
+                    android:text="31%"
+                    android:textColor="#FFFFFF"
+                    android:paddingStart="8dp" />
+            </TableRow>
+            <TableRow
+                android:gravity="center_vertical"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:text="B(Yamagata)"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <TextView
+                    android:text="Dec"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <TextView
+                    android:text="Week 1"
+                    android:textColor="#FFFFFF"
+                    android:paddingEnd="8dp" />
+
+                <SeekBar
+                    android:id="@+id/SeekBar_B_Yam"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progress="31"
+                    android:progressDrawable="@drawable/gradient_seekbar_style"
+                    android:splitTrack="false"
+                    android:thumbTint="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/PeakPercent_B_Yam"
+                    android:text="31%"
+                    android:textColor="#FFFFFF"
+                    android:paddingStart="8dp" />
+            </TableRow>
+        </TableLayout>
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
