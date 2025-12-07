@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#026ca7"
+    android:padding="12dp">
+
+    <!-- Column 1: Icon -->
+    <ImageView
+        android:id="@+id/widget_icon"
+        android:src="@drawable/virus_image"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical"
+        android:contentDescription="Virus Icon" />
+
+    <!-- Column 2 & 3 combined in vertical layout -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp">
+
+        <!-- Row 1: percentage and week -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/widget_value"
+                android:text="28%"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/widget_week"
+                android:text="Week 1"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!-- Row 2: Influenza type and date -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp">
+
+            <TextView
+                android:id="@+id/widget_type"
+                android:text="Influenza Type"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/widget_date"
+                android:text="Dec 07 - Dec 13"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
