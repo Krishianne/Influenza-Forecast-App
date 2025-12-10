@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // <-- must come first
 
+        // Update current week peak dynamically
+        updateCurrentWeekPeak();
+
         Calendar today = Calendar.getInstance();
 
         // Find the current day of week (1 = Sunday, 2 = Monday, ..., 7 = Saturday)
@@ -289,4 +292,90 @@ public class MainActivity extends AppCompatActivity {
             default: return 0;
         }
     }
+
+    private void updateCurrentWeekPeak() {
+        try {
+            // Load JSON
+            InputStream is = getAssets().open("weekly_forecast.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            String json = new String(buffer, "UTF-8");
+
+            JSONArray weeklyArray = new JSONArray(json);
+
+            // Get current week's Monday and Sunday
+            Calendar today = Calendar.getInstance();
+            int dayOfWeek = today.get(Calendar.DAY_OF_WEEK);
+            int diffToMonday = (dayOfWeek + 5) % 7; // days to subtract to get Monday
+            Calendar weekStartCal = (Calendar) today.clone();
+            weekStartCal.add(Calendar.DAY_OF_MONTH, -diffToMonday); // Monday
+            Calendar weekEndCal = (Calendar) weekStartCal.clone();
+            weekEndCal.add(Calendar.DAY_OF_MONTH, 6); // Sunday
+
+            // Format week range for display
+            SimpleDateFormat sdfDisplay = new SimpleDateFormat("MMM dd", Locale.ENGLISH);
+            String weekLabel = sdfDisplay.format(weekStartCal.getTime()) + " - " + sdfDisplay.format(weekEndCal.getTime());
+
+            // Keep track of highest percentage
+            double maxPct = -1;
+            String maxSubtype = "";
+
+            // Map subtype keys to display names
+            HashMap<String, String> subtypeDisplay = new HashMap<>();
+            subtypeDisplay.put("a_h1", "A(H1)");
+            subtypeDisplay.put("a_h1n1pdm09", "A(H1N1)pdm09");
+            subtypeDisplay.put("a_h3", "A(H3)");
+            subtypeDisplay.put("a_not_subtyped", "A(Not subtyped)");
+            subtypeDisplay.put("b_victoria", "B(Victoria)");
+            subtypeDisplay.put("b_yamagata", "B(Yamagata)");
+            subtypeDisplay.put("b_lineage_not_determined", "B(Lineage not determined)");
+
+            // Current week Monday as string for easy comparison
+            String mondayStr = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(weekStartCal.getTime());
+
+            // Iterate JSON to find the current week
+            for (int i = 0; i < weeklyArray.length(); i++) {
+                JSONObject weekObj = weeklyArray.getJSONObject(i);
+                String jsonDate = weekObj.getString("Date").split("T")[0]; // e.g., "2025-12-08"
+
+                if (jsonDate.equals(mondayStr)) { // exact Monday match
+                    // Compare all subtypes
+                    String[] subtypes = {"a_h1", "a_h1n1pdm09", "a_h3", "a_not_subtyped",
+                            "b_victoria", "b_yamagata", "b_lineage_not_determined"};
+
+                    for (String subtype : subtypes) {
+                        double pct = weekObj.getDouble(subtype + "_Pct");
+                        if (pct > maxPct) {
+                            maxPct = pct;
+                            maxSubtype = subtype;
+                        }
+                    }
+
+                    break; // found the current week
+                }
+            }
+
+            // Update TextViews
+            TextView percentText = findViewById(R.id.CurrentWeekPercent);
+            TextView subtypeText = findViewById(R.id.CurrentWeekSubtype);
+            TextView weekRangeText = findViewById(R.id.WeekRangeText);
+
+            if (maxPct >= 0) {
+                percentText.setText(Math.round(maxPct) + "%");
+                subtypeText.setText("Influenza Type: " + subtypeDisplay.get(maxSubtype));
+            } else {
+                percentText.setText("N/A");
+                subtypeText.setText("Influenza Type: N/A");
+            }
+
+            weekRangeText.setText(weekLabel);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
