@@ -11,6 +11,17 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.util.HashMap;
+
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
     Spinner spinnerID;
@@ -19,15 +30,41 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main); // <-- must come first
+
+        Calendar today = Calendar.getInstance();
+
+        // Find the current day of week (1 = Sunday, 2 = Monday, ..., 7 = Saturday)
+        int dayOfWeek = today.get(Calendar.DAY_OF_WEEK);
+
+        // Calculate difference to Monday (Calendar.MONDAY = 2)
+        int diffToMonday = (dayOfWeek + 5) % 7; // number of days to subtract to get Monday
+
+        // Start of week (Monday)
+        Calendar weekStartCal = (Calendar) today.clone();
+        weekStartCal.add(Calendar.DAY_OF_MONTH, -diffToMonday);
+
+        // End of week (Sunday)
+        Calendar weekEndCal = (Calendar) weekStartCal.clone();
+        weekEndCal.add(Calendar.DAY_OF_MONTH, 6); // Monday + 6 = Sunday
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd", Locale.ENGLISH);
+        String weekStart = sdf.format(weekStartCal.getTime());
+        String weekEnd = sdf.format(weekEndCal.getTime());
+
+        // Set the TextView
+        TextView weekRangeText = findViewById(R.id.WeekRangeText);
+        weekRangeText.setText(weekStart + " - " + weekEnd);
+
+
 
         spinnerID = findViewById(R.id.monthSelection);
 
         String[] months = {"January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December"};
 
-        // Sample Data
-        Object[][][] sampleData = createMonthsData();
+        // Load weekly forecast data
+        Object[][][] sampleData = loadWeeklyForecastData();
 
         int[] monthSubtypes = {
                 R.id.subtypeW1,
@@ -50,11 +87,11 @@ public class MainActivity extends AppCompatActivity {
                 R.id.percentW4
         };
 
-        ArrayAdapter<String> monthsAdapter = new ArrayAdapter<String>(this, R.layout.month_spinner, months);
+        ArrayAdapter<String> monthsAdapter = new ArrayAdapter<>(this, R.layout.month_spinner, months);
         monthsAdapter.setDropDownViewResource(R.layout.month_dropdown);
-
         spinnerID.setAdapter(monthsAdapter);
 
+        // Handle month selection
         spinnerID.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -62,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
 
                 for (int weekIndex = 0; weekIndex < 4; weekIndex++) {
                     Object[] weekData = selectedMonthData[weekIndex];
-
                     String subtype = (String) weekData[0];
                     int percentage = (int) weekData[1];
 
@@ -71,46 +107,16 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
+            public void onNothingSelected(AdapterView<?> adapterView) { }
         });
 
-        int[] seekBarIds = {
-                R.id.SeekBar_A,
-                R.id.SeekBar_A_H1,
-                R.id.SeekBar_A_H1N1,
-                R.id.SeekBar_A_H3,
-                R.id.SeekBar_B,
-                R.id.SeekBar_B_Vic,
-                R.id.SeekBar_B_Yam
-        };
-
-        int[] peakTextViewIds = {
-                R.id.PeakPercent_A,
-                R.id.PeakPercent_A_H1,
-                R.id.PeakPercent_A_H1N1,
-                R.id.PeakPercent_A_H3,
-                R.id.PeakPercent_B,
-                R.id.PeakPercent_B_Vic,
-                R.id.PeakPercent_B_Yam
-        };
-
-        updatePeakData(seekBarIds[0], peakTextViewIds[0], 10);
-        updatePeakData(seekBarIds[1], peakTextViewIds[1], 80);
-        updatePeakData(seekBarIds[2], peakTextViewIds[2], 25);
-        updatePeakData(seekBarIds[3], peakTextViewIds[3], 70);
-        updatePeakData(seekBarIds[4], peakTextViewIds[4], 40);
-        updatePeakData(seekBarIds[5], peakTextViewIds[5], 100);
-        updatePeakData(seekBarIds[6], peakTextViewIds[6], 30);
-
+        // Update peak outbreaks from JSON
+        updateAllPeakData();
     }
 
+
     /**
-     * Method for updating peak data under the "Peak Outbreak per Subtype" Table
-     * @param seekBarID containing the ID of the corresponding seek bar
-     * @param peakTextViewID containing the ID of the corresponding text view
-     * @param percentage containing the corresponding percentage to output
+     * Update peak data SeekBar & TextView
      */
     private void updatePeakData(int seekBarID, int peakTextViewID, int percentage) {
         SeekBar seekBar = findViewById(seekBarID);
@@ -118,10 +124,12 @@ public class MainActivity extends AppCompatActivity {
 
         textView.setText(percentage + "%");
         seekBar.setProgress(percentage);
-
-        seekBar.setOnTouchListener((v, event) -> true);
+        seekBar.setOnTouchListener((v, event) -> true); // make non-interactive
     }
 
+    /**
+     * Update month-week forecast SeekBar & TextView
+     */
     private void updateMonthWeekPercent(int monthSeekBarID, int subtypeID, int monthTextPercentID, String subtype, int monthPercentage) {
         SeekBar seekBar = findViewById(monthSeekBarID);
         TextView subtypeView = findViewById(subtypeID);
@@ -130,35 +138,155 @@ public class MainActivity extends AppCompatActivity {
         subtypeView.setText(subtype);
         percentView.setText(monthPercentage + "%");
         seekBar.setProgress(monthPercentage);
-
-        // Keep the SeekBar non-interactive
-        seekBar.setOnTouchListener((v, event) -> true);
+        seekBar.setOnTouchListener((v, event) -> true); // non-interactive
     }
 
-    private Object[][][] createMonthsData(){
-        Object[][][] sampleData = new Object[12][4][2];
+    /**
+     * Load weekly forecast data from JSON
+     */
+    private Object[][][] loadWeeklyForecastData() {
+        Object[][][] monthData = new Object[12][4][2]; // 12 months, 4 weeks, 2 items (subtype, percentage)
+        try {
+            InputStream is = getAssets().open("weekly_forecast.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            String json = new String(buffer, "UTF-8");
 
-        String[] monthNames = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+            JSONArray weeklyArray = new JSONArray(json);
 
-        int perc = 1;
+            String[] subtypes = {"a_h1", "a_h1n1pdm09", "a_h3", "a_not_subtyped",
+                    "b_victoria", "b_yamagata", "b_lineage_not_determined"};
 
-        for (int x = 0; x < 12; x++) {
-            String monthPrefix = monthNames[x];
-            for (int y = 0; y < 4; y++) {
+            for (int i = 0; i < weeklyArray.length(); i++) {
+                JSONObject week = weeklyArray.getJSONObject(i);
+                String monthName = week.getString("Month");
+                int monthIndex = monthNameToIndex(monthName);
+                int weekOfMonth = week.getInt("Week_of_Month") - 1;
 
-                String subtype = monthPrefix + (y + 1);
+                for (int s = 0; s < 4; s++) { // first 4 subtypes
+                    String subtype = subtypes[s];
+                    int pct = week.getInt(subtype + "_Pct");
+                    if (weekOfMonth < 4) {
+                        monthData[monthIndex][weekOfMonth][0] = subtype;
+                        monthData[monthIndex][weekOfMonth][1] = pct;
+                    }
+                }
+            }
 
-                if (perc > 100) {
-                    perc = 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return monthData;
+    }
+
+    /**
+     * Load peak outbreaks from JSON
+     */
+    private JSONArray loadPeakOutbreaks() {
+        try {
+            InputStream is = getAssets().open("peak_outbreaks.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            return new JSONArray(new String(buffer, "UTF-8"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new JSONArray();
+        }
+    }
+
+    /**
+     * Update all peaks using peak_outbreaks.json
+     */
+    private void updateAllPeakData() {
+        // Map JSON subtypes to UI IDs
+        HashMap<String, Integer> seekBarMap = new HashMap<>();
+        HashMap<String, Integer> textViewMap = new HashMap<>();
+        HashMap<String, Integer> weekTextMap = new HashMap<>();
+
+        // SeekBars
+        seekBarMap.put("a_not_subtyped", R.id.SeekBar_A);
+        seekBarMap.put("a_h1", R.id.SeekBar_A_H1);
+        seekBarMap.put("a_h1n1pdm09", R.id.SeekBar_A_H1N1);
+        seekBarMap.put("a_h3", R.id.SeekBar_A_H3);
+        seekBarMap.put("b_lineage_not_determined", R.id.SeekBar_B);
+        seekBarMap.put("b_victoria", R.id.SeekBar_B_Vic);
+        seekBarMap.put("b_yamagata", R.id.SeekBar_B_Yam);
+
+        // Percent TextViews
+        textViewMap.put("a_not_subtyped", R.id.PeakPercent_A);
+        textViewMap.put("a_h1", R.id.PeakPercent_A_H1);
+        textViewMap.put("a_h1n1pdm09", R.id.PeakPercent_A_H1N1);
+        textViewMap.put("a_h3", R.id.PeakPercent_A_H3);
+        textViewMap.put("b_lineage_not_determined", R.id.PeakPercent_B);
+        textViewMap.put("b_victoria", R.id.PeakPercent_B_Vic);
+        textViewMap.put("b_yamagata", R.id.PeakPercent_B_Yam);
+
+        // Week TextViews (you need to add these IDs in your XML)
+        weekTextMap.put("a_not_subtyped", R.id.WeekText_A);
+        weekTextMap.put("a_h1", R.id.WeekText_A_H1);
+        weekTextMap.put("a_h1n1pdm09", R.id.WeekText_A_H1N1);
+        weekTextMap.put("a_h3", R.id.WeekText_A_H3);
+        weekTextMap.put("b_lineage_not_determined", R.id.WeekText_B);
+        weekTextMap.put("b_victoria", R.id.WeekText_B_Vic);
+        weekTextMap.put("b_yamagata", R.id.WeekText_B_Yam);
+
+        JSONArray peaks = loadPeakOutbreaks();
+
+        for (int i = 0; i < peaks.length(); i++) {
+            try {
+                JSONObject peak = peaks.getJSONObject(i);
+                String subtype = peak.getString("Subtype").toLowerCase();
+                double probability = peak.getDouble("Probability (%)");
+                int percentage = (int) Math.round(probability);
+
+                String month = peak.getString("Month");
+                int week = peak.getInt("Week_of_Month");
+
+                String weekLabel = (month.equals("N/A") || week == 0) ? "N/A" : month.substring(0, 3) + " Week " + week;
+
+                Integer seekBarId = seekBarMap.get(subtype);
+                Integer textViewId = textViewMap.get(subtype);
+                Integer weekTextId = weekTextMap.get(subtype);
+
+                if (seekBarId != null && textViewId != null && weekTextId != null) {
+                    // Update SeekBar & percentage
+                    updatePeakData(seekBarId, textViewId, percentage);
+
+                    // Update Week label
+                    TextView weekText = findViewById(weekTextId);
+                    weekText.setText(weekLabel);
                 }
 
-                sampleData[x][y][0] = subtype;
-                sampleData[x][y][1] = perc;
-
-                perc += 1;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-        return sampleData;
+    }
+
+
+
+    /**
+     * Convert month name to index
+     */
+    private int monthNameToIndex(String month) {
+        switch (month) {
+            case "January": return 0;
+            case "February": return 1;
+            case "March": return 2;
+            case "April": return 3;
+            case "May": return 4;
+            case "June": return 5;
+            case "July": return 6;
+            case "August": return 7;
+            case "September": return 8;
+            case "October": return 9;
+            case "November": return 10;
+            case "December": return 11;
+            default: return 0;
+        }
     }
 }

@@ -1,0 +1,44 @@
+[
+  {
+    "Subtype": "a_h1",
+    "Month": "N/A",
+    "Week_of_Month": 0,
+    "Probability (%)": 0
+  },
+  {
+    "Subtype": "a_h1n1pdm09",
+    "Month": "November",
+    "Week_of_Month": 3,
+    "Probability (%)": 5.49
+  },
+  {
+    "Subtype": "a_h3",
+    "Month": "December",
+    "Week_of_Month": 1,
+    "Probability (%)": 97.3
+  },
+  {
+    "Subtype": "a_not_subtyped",
+    "Month": "November",
+    "Week_of_Month": 3,
+    "Probability (%)": 2.2
+  },
+  {
+    "Subtype": "b_victoria",
+    "Month": "November",
+    "Week_of_Month": 4,
+    "Probability (%)": 2.13
+  },
+  {
+    "Subtype": "b_yamagata",
+    "Month": "N/A",
+    "Week_of_Month": 0,
+    "Probability (%)": 0
+  },
+  {
+    "Subtype": "b_lineage_not_determined",
+    "Month": "N/A",
+    "Week_of_Month": 0,
+    "Probability (%)": 0
+  }
+]

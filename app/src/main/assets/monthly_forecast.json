@@ -1,0 +1,122 @@
+[
+  {
+    "Month": "April",
+    "a_h1_Pct": 0,
+    "a_h1n1pdm09_Pct": 3.4,
+    "a_h3_Pct": 94.3925,
+    "a_not_subtyped_Pct": 1,
+    "b_victoria_Pct": 1.2,
+    "b_yamagata_Pct": 0,
+    "b_lineage_not_determined_Pct": 0
+  },
+  {
+    "Month": "August",
+    "a_h1_Pct": 0,
+    "a_h1n1pdm09_Pct": 3.4,
+    "a_h3_Pct": 94.39,
+    "a_not_subtyped_Pct": 1,
+    "b_victoria_Pct": 1.2,
+    "b_yamagata_Pct": 0,
+    "b_lineage_not_determined_Pct": 0
+  },
+  {
+    "Month": "December",
+    "a_h1_Pct": 0,
+    "a_h1n1pdm09_Pct": 3.2188888889,
+    "a_h3_Pct": 94.69,
+    "a_not_subtyped_Pct": 0.9555555556,
+    "b_victoria_Pct": 1.1311111111,
+    "b_yamagata_Pct": 0,
+    "b_lineage_not_determined_Pct": 0
+  },
+  {
+    "Month": "February",
+    "a_h1_Pct": 0,
+    "a_h1n1pdm09_Pct": 3.41,
+    "a_h3_Pct": 94.3875,
+    "a_not_subtyped_Pct": 1.005,
+    "b_victoria_Pct": 1.205,
+    "b_yamagata_Pct": 0,
+    "b_lineage_not_determined_Pct": 0
+  },
+  {
+    "Month": "January",
+    "a_h1_Pct": 0,
+    "a_h1n1pdm09_Pct": 3.42,
+    "a_h3_Pct": 94.3625,
+    "a_not_subtyped_Pct": 1.01,
+    "b_victoria_Pct": 1.205,
+    "b_yamagata_Pct": 0,
+    "b_lineage_not_determined_Pct": 0
+  },
+  {
+    "Month": "July",
+    "a_h1_Pct": 0,
+    "a_h1n1pdm09_Pct": 3.4,
+    "a_h3_Pct": 94.39,
+    "a_not_subtyped_Pct": 1,
+    "b_victoria_Pct": 1.2,
+    "b_yamagata_Pct": 0,
+    "b_lineage_not_determined_Pct": 0
+  },
+  {
+    "Month": "June",
+    "a_h1_Pct": 0,
+    "a_h1n1pdm09_Pct": 3.4,
+    "a_h3_Pct": 94.39,
+    "a_not_subtyped_Pct": 1,
+    "b_victoria_Pct": 1.2,
+    "b_yamagata_Pct": 0,
+    "b_lineage_not_determined_Pct": 0
+  },
+  {
+    "Month": "March",
+    "a_h1_Pct": 0,
+    "a_h1n1pdm09_Pct": 3.402,
+    "a_h3_Pct": 94.394,
+    "a_not_subtyped_Pct": 1,
+    "b_victoria_Pct": 1.2,
+    "b_yamagata_Pct": 0,
+    "b_lineage_not_determined_Pct": 0
+  },
+  {
+    "Month": "May",
+    "a_h1_Pct": 0,
+    "a_h1n1pdm09_Pct": 3.4,
+    "a_h3_Pct": 94.39,
+    "a_not_subtyped_Pct": 1,
+    "b_victoria_Pct": 1.2,
+    "b_yamagata_Pct": 0,
+    "b_lineage_not_determined_Pct": 0
+  },
+  {
+    "Month": "November",
+    "a_h1_Pct": 0,
+    "a_h1n1pdm09_Pct": 4.0783333333,
+    "a_h3_Pct": 93.2633333333,
+    "a_not_subtyped_Pct": 1.2216666667,
+    "b_victoria_Pct": 1.43,
+    "b_yamagata_Pct": 0,
+    "b_lineage_not_determined_Pct": 0
+  },
+  {
+    "Month": "October",
+    "a_h1_Pct": 0,
+    "a_h1n1pdm09_Pct": 3.4,
+    "a_h3_Pct": 94.39,
+    "a_not_subtyped_Pct": 1,
+    "b_victoria_Pct": 1.2,
+    "b_yamagata_Pct": 0,
+    "b_lineage_not_determined_Pct": 0
+  },
+  {
+    "Month": "September",
+    "a_h1_Pct": 0,
+    "a_h1n1pdm09_Pct": 3.4,
+    "a_h3_Pct": 94.39,
+    "a_not_subtyped_Pct": 1,
+    "b_victoria_Pct": 1.2,
+    "b_yamagata_Pct": 0,
+    "b_lineage_not_determined_Pct": 0
+  }
+]
