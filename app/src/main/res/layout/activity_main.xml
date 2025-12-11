@@ -567,7 +567,7 @@
                     android:id="@+id/credits"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="©Team Mac-E"
+                    android:text="©Grow a Thesis"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
                     android:layout_gravity="center"

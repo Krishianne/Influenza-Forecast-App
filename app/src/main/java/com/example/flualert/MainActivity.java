@@ -102,21 +102,82 @@ public class MainActivity extends AppCompatActivity {
         // Handle month selection
         spinnerID.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Object[][] selectedMonthData = sampleData[i];
+            public void onItemSelected(AdapterView<?> adapterView, View view, int monthIndex, long l) {
+                try {
+                    InputStream is = getAssets().open("weekly_forecast.json");
+                    int size = is.available();
+                    byte[] buffer = new byte[size];
+                    is.read(buffer);
+                    is.close();
+                    JSONArray weeklyArray = new JSONArray(new String(buffer, "UTF-8"));
 
-                for (int weekIndex = 0; weekIndex < 4; weekIndex++) {
-                    Object[] weekData = selectedMonthData[weekIndex];
-                    String subtype = (String) weekData[0];
-                    int percentage = (int) weekData[1];
+                    // Get selected month name
+                    String selectedMonth = adapterView.getItemAtPosition(monthIndex).toString();
 
-                    updateMonthWeekPercent(monthSeekBars[weekIndex], monthSubtypes[weekIndex], monthPercentageText[weekIndex], subtype, percentage);
+                    // Arrays for TableRow IDs
+                    int[] weekSubtypeIDs = {R.id.subtypeW1, R.id.subtypeW2, R.id.subtypeW3, R.id.subtypeW4};
+                    int[] weekPercentIDs = {R.id.percentW1, R.id.percentW2, R.id.percentW3, R.id.percentW4};
+                    int[] weekSeekBarIDs = {R.id.seekBarW1, R.id.seekBarW2, R.id.seekBarW3, R.id.seekBarW4};
+
+                    // Subtype display names
+                    HashMap<String, String> subtypeDisplay = new HashMap<>();
+                    subtypeDisplay.put("a_h1", "A(H1)");
+                    subtypeDisplay.put("a_h1n1pdm09", "A(H1N1)pdm09");
+                    subtypeDisplay.put("a_h3", "A(H3)");
+                    subtypeDisplay.put("a_not_subtyped", "A");
+                    subtypeDisplay.put("b_victoria", "B(Victoria)");
+                    subtypeDisplay.put("b_yamagata", "B(Yamagata)");
+                    subtypeDisplay.put("b_lineage_not_determined", "B");
+
+                    // Loop through weeks 1-4
+                    for (int weekNum = 1; weekNum <= 4; weekNum++) {
+                        double maxPct = -1;
+                        String maxSubtype = "";
+                        // Find JSON entry for this month/week
+                        for (int i = 0; i < weeklyArray.length(); i++) {
+                            JSONObject weekObj = weeklyArray.getJSONObject(i);
+                            if (weekObj.getString("Month").equals(selectedMonth)
+                                    && weekObj.getInt("Week_of_Month") == weekNum) {
+
+                                // Check all subtypes
+                                String[] subtypes = {"a_h1", "a_h1n1pdm09", "a_h3", "a_not_subtyped",
+                                        "b_victoria", "b_yamagata", "b_lineage_not_determined"};
+                                for (String subtype : subtypes) {
+                                    double pct = weekObj.optDouble(subtype + "_Pct", 0);
+                                    if (pct > maxPct) {
+                                        maxPct = pct;
+                                        maxSubtype = subtype;
+                                    }
+                                }
+                                break; // found the week
+                            }
+                        }
+
+                        // Update UI
+                        TextView subtypeText = findViewById(weekSubtypeIDs[weekNum - 1]);
+                        TextView percentText = findViewById(weekPercentIDs[weekNum - 1]);
+                        SeekBar seekBar = findViewById(weekSeekBarIDs[weekNum - 1]);
+
+                        if (!maxSubtype.isEmpty()) {
+                            subtypeText.setText(subtypeDisplay.get(maxSubtype));
+                            percentText.setText(Math.round(maxPct) + "%");
+                            seekBar.setProgress((int) Math.round(maxPct));
+                        } else {
+                            subtypeText.setText("N/A");
+                            percentText.setText("0%");
+                            seekBar.setProgress(0);
+                        }
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) { }
         });
+
 
         // Update peak outbreaks from JSON
         updateAllPeakData();
