@@ -167,6 +167,10 @@ public class MainActivity extends AppCompatActivity {
                             percentText.setText("0%");
                             seekBar.setProgress(0);
                         }
+
+                        // Make it non-interactive here
+                        seekBar.setEnabled(false);
+                        seekBar.setOnTouchListener((v, event) -> true);
                     }
 
                 } catch (Exception e) {
@@ -194,6 +198,8 @@ public class MainActivity extends AppCompatActivity {
         textView.setText(percentage + "%");
         seekBar.setProgress(percentage);
         seekBar.setOnTouchListener((v, event) -> true); // make non-interactive
+        seekBar.setEnabled(false);
+
     }
 
     /**
@@ -208,6 +214,7 @@ public class MainActivity extends AppCompatActivity {
         percentView.setText(monthPercentage + "%");
         seekBar.setProgress(monthPercentage);
         seekBar.setOnTouchListener((v, event) -> true); // non-interactive
+        seekBar.setEnabled(false);
     }
 
     /**
