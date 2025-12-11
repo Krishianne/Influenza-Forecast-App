@@ -1,8 +1,10 @@
 package com.example.flualert;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.widget.RemoteViews;
 
 import org.json.JSONArray;
@@ -91,6 +93,16 @@ public class WidgetProvider extends AppWidgetProvider {
                 views.setTextViewText(R.id.widget_type, typeDisplay);
                 views.setTextViewText(R.id.widget_week, "Week " + getWeekOfMonth(today));
                 views.setTextViewText(R.id.widget_date, weekLabel);
+
+                // --- Make widget clickable ---
+                Intent intent = new Intent(context, MainActivity.class);
+                PendingIntent pendingIntent = PendingIntent.getActivity(
+                        context,
+                        0,
+                        intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+                );
+                views.setOnClickPendingIntent(R.id.widget_root, pendingIntent); // Root layout must have ID
 
                 // Push update
                 appWidgetManager.updateAppWidget(widgetId, views);
